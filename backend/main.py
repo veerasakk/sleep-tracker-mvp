@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, Union
 from pydantic import BaseModel
@@ -8,10 +8,10 @@ import os
 
 app = FastAPI(title="Sleep Tracker API")
 
-# CORS: อนุญาต frontend ท้องถิ่น
+# ✅ CORS: อนุญาตทุก origin (จำเป็นสำหรับ Vercel + Render)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=["*"],  # อนุญาต frontend ทุกที่ (Vercel, localhost, ฯลฯ)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
